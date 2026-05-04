@@ -2,4 +2,8 @@
 .claude/
 __pycache__/
 *.pyc
+*.egg-info/
+build/
+dist/
 uv.lock
+.DS_Store

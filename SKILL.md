@@ -52,7 +52,7 @@ description: 搜索腾讯体系内容（微信公众号、腾讯新闻等 qq.com
 #### Step 1: 多引擎搜索
 
 ```bash
-uv run --project /Users/lanxin/projects/weixin_skill python3 /Users/lanxin/projects/weixin_skill/weixin_search.py search "<关键词>" --pages <N> --engines sogou,baidu
+weixin-search search "<关键词>" --pages <N> --engines sogou,baidu
 ```
 
 - `--pages` 取用户指定值，未指定则默认 `3`
@@ -89,7 +89,7 @@ uv run --project /Users/lanxin/projects/weixin_skill python3 /Users/lanxin/proje
 当用户选择某篇文章后，使用 Playwright 获取正文：
 
 ```bash
-uv run --project /Users/lanxin/projects/weixin_skill python3 /Users/lanxin/projects/weixin_skill/weixin_search.py content "<url>"
+weixin-search content "<url>"
 ```
 
 - `<url>` 优先使用 `real_url`，如为空则使用 `link`
@@ -117,7 +117,7 @@ uv run --project /Users/lanxin/projects/weixin_skill python3 /Users/lanxin/proje
 
 1. **Playwright 多引擎搜索**（搜狗 + 百度 + Google）：
 ```bash
-uv run --project /Users/lanxin/projects/weixin_skill python3 /Users/lanxin/projects/weixin_skill/weixin_search.py search "<关键词>" --pages <N> --engines sogou,baidu,google
+weixin-search search "<关键词>" --pages <N> --engines sogou,baidu,google
 ```
 - `--pages` 默认 `5`
 
@@ -180,7 +180,7 @@ uv run --project /Users/lanxin/projects/weixin_skill python3 /Users/lanxin/proje
 ## 注意事项
 
 - 搜索使用 Playwright 无头浏览器，搜狗+百度双引擎默认开启，深度模式加入 Google
-- 搜索耗时约 30-60 秒（多引擎并行页面加载），属于正常范围
+- 多引擎并行搜索（每个引擎独立 tab），搜索耗时约 15-30 秒
 - 百度结果通过 `mu` 属性直接获取真实 qq.com 链接，无需额外跳转
 - 搜狗/百度重定向链接在获取内容时自动解析，无需手动处理
 - 已删除的文章会自动尝试 web.archive.org 存档获取

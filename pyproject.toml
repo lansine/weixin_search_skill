@@ -1,10 +1,13 @@
 [project]
-name = "weixin-skill"
-version = "0.1.0"
-description = "微信公众号搜索 Claude Code Skill"
+name = "weixin-search-skill"
+version = "0.2.0"
+description = "微信/腾讯内容搜索 Claude Code Skill"
 requires-python = ">=3.9"
 dependencies = [
     "requests>=2.28.0",
     "lxml>=4.9.0",
     "playwright>=1.40.0",
 ]
+
+[project.scripts]
+weixin-search = "weixin_search:main"
