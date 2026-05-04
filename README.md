@@ -220,18 +220,28 @@ weixin-search search "新能源" --pages 2 --engines sogou,baidu,google
 用户输入 /weixin-search
        │
        ▼
-   SKILL.md（流程编排）
+   SKILL.md（流程编排 + 智能搜索策略）
        │
-       ├─ weixin-search CLI（Playwright 搜索 + 内容获取）
+       ├─ 查询理解 → 构造最优关键词
+       │
+       ├─ weixin-search CLI（Playwright 多引擎并行）
        │    ├─ 搜狗微信  ─┐
-       │    ├─ 百度      ─┼─ 异步并行 → 去重 → 结果表格
+       │    ├─ 百度      ─┼─ 异步并行 → 去重
        │    └─ Google    ─┘
+       │         │
+       │         ▼
+       │    结果质量评估 ──不足──→ 查询重构 → 重新搜索（最多 3 轮）
+       │         │
+       │        充足
+       │         │
+       ├─ Tavily MCP（可选，兜底 + 深度调研）
+       │    ├─ tavily_search    ─ 兜底搜索 / 深度补充
+       │    ├─ tavily_extract   ─ 内容获取兜底
+       │    ├─ tavily_research  ─ 综合调研
+       │    └─ tavily_crawl     ─ 发现更多内容
        │
-       └─ Tavily MCP（可选）
-            ├─ tavily_search    ─ 兜底搜索 / 深度补充
-            ├─ tavily_extract   ─ 内容获取兜底
-            ├─ tavily_research  ─ 综合调研
-            └─ tavily_crawl     ─ 发现更多内容
+       ▼
+   内容分析 → 结构化摘要 → 主动建议下一步
 ```
 
 ## 致谢
